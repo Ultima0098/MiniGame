@@ -267,7 +267,15 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     pin03.requestFocus();
                     break;
             }
-//comment
+
+        }
+
+        switch (view.getId()) {
+
+            case R.id.keyEnter:
+                //code for enter goes here
+                break;
+
         }
 
     }
