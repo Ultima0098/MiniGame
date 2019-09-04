@@ -15,10 +15,12 @@
         android:paddingStart="65sp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
+            android:layout_marginBottom="41dp">
 
             <EditText
                 android:id="@+id/pin1"
@@ -26,8 +28,12 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:background="@drawable/code_border"
-                android:enabled="false"
-                android:inputType="number" />
+                android:enabled="true"
+                android:inputType="number"
+                android:labelFor="@+id/pin1"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/pin2"
@@ -36,8 +42,12 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/pin1"
                 android:background="@drawable/code_border"
-                android:enabled="false"
-                android:inputType="number" />
+                android:enabled="true"
+                android:inputType="number"
+                android:labelFor="@+id/pin2"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/pin3"
@@ -46,8 +56,12 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/pin2"
                 android:background="@drawable/code_border"
-                android:enabled="false"
-                android:inputType="number" />
+                android:enabled="true"
+                android:inputType="number"
+                android:labelFor="@+id/pin3"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/pin4"
@@ -56,25 +70,25 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/pin3"
                 android:background="@drawable/code_border"
-                android:enabled="false"
-                android:inputType="number" />
+                android:enabled="true"
+                android:inputType="number"
+                android:labelFor="@+id/pin4"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
 
         </RelativeLayout>
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/keypanel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignStart="@+id/codepanel"
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/codepanel"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:paddingEnd="70sp"
-        android:paddingStart="70sp"
-        android:paddingTop="20sp">
+        android:layout_centerHorizontal="true"
+        android:columnCount="3"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/key1"
@@ -91,7 +105,6 @@
             android:layout_width="70sp"
             android:layout_height="70sp"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key1"
             android:background="@drawable/key_button_background"
             android:text="@string/_2"
             android:textColor="@color/cardview_light_background"
@@ -102,7 +115,6 @@
             android:layout_width="70sp"
             android:layout_height="70sp"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key2"
             android:background="@drawable/key_button_background"
             android:text="@string/_3"
             android:textColor="@color/cardview_light_background"
@@ -112,7 +124,6 @@
             android:id="@+id/key4"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key1"
             android:layout_margin="4sp"
             android:background="@drawable/key_button_background"
             android:text="@string/_4"
@@ -123,9 +134,7 @@
             android:id="@+id/key5"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key2"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key4"
             android:background="@drawable/key_button_background"
             android:text="@string/_5"
             android:textColor="@color/cardview_light_background"
@@ -135,9 +144,7 @@
             android:id="@+id/key6"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key3"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key5"
             android:background="@drawable/key_button_background"
             android:text="@string/_6"
             android:textColor="@color/cardview_light_background"
@@ -147,7 +154,6 @@
             android:id="@+id/key7"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key4"
             android:layout_margin="4sp"
             android:background="@drawable/key_button_background"
             android:text="@string/_7"
@@ -158,9 +164,7 @@
             android:id="@+id/key8"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key5"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key7"
             android:background="@drawable/key_button_background"
             android:text="@string/_8"
             android:textColor="@color/cardview_light_background"
@@ -170,9 +174,7 @@
             android:id="@+id/key9"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key6"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key8"
             android:background="@drawable/key_button_background"
             android:text="@string/_9"
             android:textColor="@color/cardview_light_background"
@@ -182,7 +184,6 @@
             android:id="@+id/keyClear"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key7"
             android:layout_margin="4sp"
             android:background="@drawable/key_clear_background"
             android:text="@string/clear"
@@ -192,9 +193,7 @@
             android:id="@+id/key0"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key8"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key7"
             android:background="@drawable/key_button_background"
             android:text="@string/_0"
             android:textColor="@color/cardview_light_background"
@@ -204,13 +203,11 @@
             android:id="@+id/keyEnter"
             android:layout_width="70sp"
             android:layout_height="70sp"
-            android:layout_below="@+id/key9"
             android:layout_margin="4sp"
-            android:layout_toEndOf="@+id/key0"
             android:background="@drawable/key_enter_background"
             android:text="@string/enter"
             android:textColor="@color/cardview_light_background" />
 
-    </RelativeLayout>
+    </GridLayout>
 
 </RelativeLayout>
