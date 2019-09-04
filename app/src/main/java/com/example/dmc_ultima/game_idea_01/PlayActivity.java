@@ -267,7 +267,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     pin03.requestFocus();
                     break;
             }
-
+//comment
         }
 
     }
