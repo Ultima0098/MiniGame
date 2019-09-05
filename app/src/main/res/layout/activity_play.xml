@@ -16,10 +16,19 @@
 
 
         <TextView
-            android:id="@+id/passCodeTestView"
+            android:id="@+id/passCodeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
+        <TextView
+            android:id="@+id/resultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/passCodeTextView"
+            android:layout_below="@+id/passCodeTextView"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="17dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -60,7 +69,7 @@
                 android:id="@+id/pin3"
                 android:layout_width="60sp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
                 android:layout_toEndOf="@+id/pin2"
                 android:background="@drawable/code_border"
                 android:enabled="true"
@@ -74,7 +83,7 @@
                 android:id="@+id/pin4"
                 android:layout_width="60sp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
                 android:layout_toEndOf="@+id/pin3"
                 android:background="@drawable/code_border"
                 android:enabled="true"

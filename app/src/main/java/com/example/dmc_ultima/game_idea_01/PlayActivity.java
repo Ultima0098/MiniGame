@@ -19,7 +19,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     private int[] gamePassCode;
     private EditText[] pinEditTextArray;
-    private TextView passCodeTestView;
+    private TextView passCodeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +27,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-        passCodeTestView = findViewById(R.id.passCodeTestView);
+        passCodeTextView = findViewById(R.id.passCodeTextView);
 
         pin01 = findViewById(R.id.pin1);
         pin02 = findViewById(R.id.pin2);
@@ -294,10 +294,46 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.keyEnter:
                 //code for enter goes here
 
-                //Check if answer is correct
-                boolean isPinCorrect = checkPassCodeInput();
+                TextView resultTextView = findViewById(R.id.resultTextView);
 
-                Log.d("Enter Key", "Result: " + isPinCorrect);
+                //Check if answer is correct
+                int[][] answerResultsArray = checkPassCodeInput();
+                String resultStatement = "";
+
+                //Log results and numbers
+                for(int resultCount = 0; resultCount < answerResultsArray.length; resultCount++)
+                {
+
+                    String resultString = "";
+
+                    switch(answerResultsArray[0][resultCount])
+                    {
+
+                        case 0:
+
+                            resultString = "Correct Number/Placement";
+
+                            break;
+
+                        case 1:
+
+                            resultString = "Number does not appear";
+
+                            break;
+
+                        case 2:
+
+                            resultString = "Number in wrong position";
+
+                            break;
+
+                    }
+
+                    resultStatement = resultStatement + "" + answerResultsArray[1][resultCount] + " : " + resultString + "\n";
+
+                }
+
+                resultTextView.setText(resultStatement);
 
                 break;
 
@@ -364,33 +400,60 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        passCodeTestView.setText(Arrays.toString(gamePassCode));
+        passCodeTextView.setText(Arrays.toString(gamePassCode));
 
     }
 
-    private boolean checkPassCodeInput()
+    //Compare answer to passcode
+    private int[][] checkPassCodeInput()
     {
 
-        int checkPassCodeCount;
-        boolean isPassCodeCorrect = true;
+        int[][] resultsArray = new int[pinEditTextArray.length][pinEditTextArray.length];
 
         //Compare digits between the Pin Array and gamePassCode
-        for(checkPassCodeCount = 0; checkPassCodeCount < pinEditTextArray.length; checkPassCodeCount++)
+        //Results: 0 = Correct; 1 = Wrong; 2 = Occurs in passcode
+        for(int getResultsCount = 0; getResultsCount < pinEditTextArray.length; getResultsCount++)
         {
 
-            int passCodeDigit = gamePassCode[checkPassCodeCount];
-            int pinDigit = Integer.parseInt(pinEditTextArray[checkPassCodeCount].getText().toString());
+            int passCodeDigit = gamePassCode[getResultsCount];
+            int resultState;
+            int pinDigit = Integer.parseInt(pinEditTextArray[getResultsCount].getText().toString());
 
+            //Are the two digits different?
             if(passCodeDigit != pinDigit)
             {
 
-                isPassCodeCorrect = false;
+                resultState = 1;
+
+                //Check if the digit occurs in gamePassCode
+                for(int checkPassCodeCount = 0; checkPassCodeCount < gamePassCode.length; checkPassCodeCount++)
+                {
+
+
+                    if(pinDigit == gamePassCode[checkPassCodeCount])
+                    {
+
+                        resultState = 2;
+
+                    }
+                }
+            }
+            else
+            {
+
+                resultState = 0;
 
             }
+
+            //Set Result
+            resultsArray[0][getResultsCount] = resultState;
+            //Set Digit
+            resultsArray[1][getResultsCount] = pinDigit;
+
         }
 
         //Return results
-        return isPassCodeCorrect;
+        return resultsArray;
 
     }
 
