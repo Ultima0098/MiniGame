@@ -18,7 +18,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     Button key01, key02, key03, key04, key05, key06, key07, key08, key09, key00, keyenter, keyclear;
 
     private int[] gamePassCode;
-    private EditText[] pin;
+    private EditText[] pinEditTextArray;
     private TextView passCodeTestView;
 
     @Override
@@ -80,15 +80,16 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         keyenter.setOnClickListener(this);
         keyclear.setOnClickListener(this);
 
-
+        pinEditTextArray = new EditText[]{pin01, pin02, pin03, pin04};
         //Generate Game Passcode
         generatePassCode();
-
 
     }
 
     @Override
     public void onClick(View view) {
+
+        Log.d("Enter Key", "Key pressed");
 
         if (pin01.isFocused()) {
 
@@ -292,6 +293,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.keyEnter:
                 //code for enter goes here
+
+                //Check if answer is correct
+                boolean isPinCorrect = checkPassCodeInput();
+
+                Log.d("Enter Key", "Result: " + isPinCorrect);
+
                 break;
 
         }
@@ -351,15 +358,39 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                         isRepeatingDigit = true;
 
                     }
-
                 }
-
             }
             while(isRepeatingDigit);
 
         }
 
         passCodeTestView.setText(Arrays.toString(gamePassCode));
+
+    }
+
+    private boolean checkPassCodeInput()
+    {
+
+        int checkPassCodeCount;
+        boolean isPassCodeCorrect = true;
+
+        //Compare digits between the Pin Array and gamePassCode
+        for(checkPassCodeCount = 0; checkPassCodeCount < pinEditTextArray.length; checkPassCodeCount++)
+        {
+
+            int passCodeDigit = gamePassCode[checkPassCodeCount];
+            int pinDigit = Integer.parseInt(pinEditTextArray[checkPassCodeCount].getText().toString());
+
+            if(passCodeDigit != pinDigit)
+            {
+
+                isPassCodeCorrect = false;
+
+            }
+        }
+
+        //Return results
+        return isPassCodeCorrect;
 
     }
 
