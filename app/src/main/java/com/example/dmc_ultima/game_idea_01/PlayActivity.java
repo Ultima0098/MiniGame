@@ -2,9 +2,13 @@ package com.example.dmc_ultima.game_idea_01;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Arrays;
 import java.util.Random;
 
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener
@@ -14,6 +18,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     Button key01, key02, key03, key04, key05, key06, key07, key08, key09, key00, keyenter, keyclear;
 
     private int[] gamePassCode;
+    private TextView passCodeTestView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,8 +26,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-        //Generate Game Passcode
-        generatePassCode();
+        passCodeTestView = findViewById(R.id.passCodeTestView);
 
         pin01 = findViewById(R.id.pin1);
         pin02 = findViewById(R.id.pin2);
@@ -74,6 +78,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         keyenter.setOnClickListener(this);
         keyclear.setOnClickListener(this);
+
+        //Generate Game Passcode
+        generatePassCode();
 
     }
 
@@ -298,57 +305,58 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Passcode Length
         int length = 4;
         //Count used while setting passcode
-        int passCodeCount;
+        int passCodeCount = 0;
 
-        //initializing gamePassCode Variable
+        //Initializing gamePassCode Variable
         gamePassCode = new int[length];
 
-        //Loop for setting passcode
-        for( passCodeCount = 0 ; passCodeCount < length ; passCodeCount ++)
+        //Setting Initial Passcode Value
+        do
         {
 
-            //Unique digit check
-            boolean isAUniqueDigit;
-            //New digit used
-            int newDigit;
+            int newDigit = rnd.nextInt(9);
+            gamePassCode[passCodeCount] = newDigit;
+            passCodeCount++;
 
-            //Setting New Digit
+        }
+        while(passCodeCount < length);
+
+        //Replace repeated digits
+        for(int digitReplaceCount = 0; digitReplaceCount < gamePassCode.length; digitReplaceCount++)
+        {
+
+            int passCodeDigit;
+            boolean isRepeatingDigit;
+
             do
             {
-                //Set count to gamePassCode Length
-                int newDigitCount = gamePassCode.length - 1;
-                //Set value from 0-9 into newDigit
-                newDigit = rnd.nextInt(9);
-                //Reset Boolean
-                isAUniqueDigit = true;
 
-                //Check if newDigit is not repeating
-                while(newDigitCount >= 0)
+                passCodeDigit = gamePassCode[digitReplaceCount];
+                isRepeatingDigit = false;
+
+                //Compare remaining digits with set digit
+                for(int checkRepeatCount = 0; checkRepeatCount < gamePassCode.length; checkRepeatCount++)
                 {
 
-                    //Get digit in index
-                    int gamePassCodeDigit = gamePassCode[newDigitCount];
+                    int digitCheck = gamePassCode[checkRepeatCount];
 
-                    //Check if digit is not unique
-                    if(gamePassCodeDigit == newDigitCount)
+                    //Is the checked digit the same value but in a different position?
+                    if(checkRepeatCount != digitReplaceCount && digitCheck == passCodeDigit)
                     {
 
-                        isAUniqueDigit = false;
+                        gamePassCode[digitReplaceCount] = rnd.nextInt(9);
+                        isRepeatingDigit = true;
 
                     }
-
-                    newDigitCount--;
 
                 }
 
             }
-            while(!isAUniqueDigit);
-
-            //Add new digit to passcode
-            gamePassCode[passCodeCount] = newDigit;
-
+            while(isRepeatingDigit);
 
         }
+
+        passCodeTestView.setText(Arrays.toString(gamePassCode));
 
     }
 
