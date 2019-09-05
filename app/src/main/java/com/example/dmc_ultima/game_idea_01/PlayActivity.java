@@ -18,6 +18,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     Button key01, key02, key03, key04, key05, key06, key07, key08, key09, key00, keyenter, keyclear;
 
     private int[] gamePassCode;
+    private EditText[] pin;
     private TextView passCodeTestView;
 
     @Override
@@ -79,8 +80,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         keyenter.setOnClickListener(this);
         keyclear.setOnClickListener(this);
 
+
         //Generate Game Passcode
         generatePassCode();
+
 
     }
 
